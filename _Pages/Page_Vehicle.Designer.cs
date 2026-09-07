@@ -1,4 +1,4 @@
-﻿namespace CarRentalManagementSystem._Pages
+namespace CarRentalManagementSystem._Pages
 {
     partial class Page_Vehicle
     {
@@ -49,17 +49,12 @@
             this.dateAddedDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Edit = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Delete = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.vehicleInventoryBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.car_rentalDataSet1 = new CarRentalManagementSystem.car_rentalDataSet1();
-            this.vehicleInventoryTableAdapter = new CarRentalManagementSystem.car_rentalDataSet1TableAdapters.vehicleInventoryTableAdapter();
             this.cmbTransmission = new Guna.UI2.WinForms.Guna2ComboBox();
             this.txtSearch = new Guna.UI2.WinForms.Guna2TextBox();
             this.btnAdd = new Guna.UI2.WinForms.Guna2GradientButton();
             this.refreshTable = new System.Windows.Forms.Timer(this.components);
             this.btnRefresh = new Guna.UI2.WinForms.Guna2Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVehicles)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.vehicleInventoryBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.car_rentalDataSet1)).BeginInit();
             this.SuspendLayout();
             // 
             // dgvVehicles
@@ -98,7 +93,6 @@
             this.Edit,
             this.Delete});
             this.dgvVehicles.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.dgvVehicles.DataSource = this.vehicleInventoryBindingSource;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Franklin Gothic Medium", 10.2F);
@@ -281,20 +275,6 @@
             this.Delete.Name = "Delete";
             this.Delete.ReadOnly = true;
             // 
-            // vehicleInventoryBindingSource
-            // 
-            this.vehicleInventoryBindingSource.DataMember = "vehicleInventory";
-            this.vehicleInventoryBindingSource.DataSource = this.car_rentalDataSet1;
-            // 
-            // car_rentalDataSet1
-            // 
-            this.car_rentalDataSet1.DataSetName = "car_rentalDataSet1";
-            this.car_rentalDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // vehicleInventoryTableAdapter
-            // 
-            this.vehicleInventoryTableAdapter.ClearBeforeFill = true;
-            // 
             // cmbTransmission
             // 
             this.cmbTransmission.BackColor = System.Drawing.Color.Transparent;
@@ -410,8 +390,6 @@
             this.Size = new System.Drawing.Size(1071, 710);
             this.Load += new System.EventHandler(this.Page_Vehicle_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvVehicles)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.vehicleInventoryBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.car_rentalDataSet1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -419,9 +397,6 @@
         #endregion
 
         private Guna.UI2.WinForms.Guna2DataGridView dgvVehicles;
-        private System.Windows.Forms.BindingSource vehicleInventoryBindingSource;
-        private car_rentalDataSet1 car_rentalDataSet1;
-        private car_rentalDataSet1TableAdapters.vehicleInventoryTableAdapter vehicleInventoryTableAdapter;
         private Guna.UI2.WinForms.Guna2ComboBox cmbTransmission;
         private Guna.UI2.WinForms.Guna2TextBox txtSearch;
         private Guna.UI2.WinForms.Guna2GradientButton btnAdd;

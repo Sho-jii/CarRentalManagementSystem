@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -50,8 +50,10 @@ namespace CarRentalManagementSystem._Pages
                     // Number of clients in possession
                     string clientsInPossession = db.Scalar("SELECT COUNT(*) FROM clientProfiles WHERE In_Possession > 0");
 
-                    // Total revenue (only for returned vehicles)
-                    string revenue = db.Scalar("SELECT SUM(Days * DailyHirePrice) FROM vehicleRentals WHERE ReturnDate IS NOT NULL");
+                    // Total revenue (only for returned vehicles, including rental and damages)
+                    string revenue = db.Scalar("SELECT ISNULL(SUM(Total), 0) FROM vehicleRentals WHERE ReturnDate IS NOT NULL");
+                    decimal revValue = 0;
+                    decimal.TryParse(revenue, out revValue);
 
                     lblvehicles.Text = vehicleCount;
                     lblvehiclesIssued.Text = vehiclesIssued;
@@ -60,7 +62,7 @@ namespace CarRentalManagementSystem._Pages
                     lblvehiclesDL.Text = vehiclesDamagedLost;
                     lblclients.Text = clientCount;
                     lblclientsIP.Text = clientsInPossession;
-                    lblrevenue.Text = $"₱{revenue}";
+                    lblrevenue.Text = $"₱{revValue:N2}";
                 }
             }
             catch (Exception ex)
@@ -71,8 +73,8 @@ namespace CarRentalManagementSystem._Pages
         }
         private void LoadRentDataTodayF()
         {
-            string searchTerm = txtSearch.Text;
-            string status = cmbStatus.SelectedItem.ToString();
+            string searchTerm = txtSearch.Text.Trim();
+            string status = cmbStatus.SelectedItem?.ToString() ?? "Status (All)";
 
             DataTable rentalDataToday = rental.LoadRentDataToday(searchTerm, status);
             dgvRental.DataSource = rentalDataToday;

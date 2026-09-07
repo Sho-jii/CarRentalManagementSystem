@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,9 +14,6 @@ namespace CarRentalManagementSystem._Forms
 {
     public partial class Frm_Return : Form
     {
-        Page_Dashboard dashboard = new Page_Dashboard();
-        Rental Rentals = new Rental();
-
         private int rentalId;
         private int clientId;
         private int vehicleId;
@@ -85,7 +82,8 @@ namespace CarRentalManagementSystem._Forms
                 string updateVehicleConditionSql = @"UPDATE vehicleInventory 
                                              SET Condition = @Condition, 
                                                  Status = CASE 
-                                                             WHEN @status = 'Damaged' THEN 'Unavailable' 
+                                                             WHEN @status = 'Damaged' OR @Condition IN ('Damaged', 'VeryBad', 'Very Bad', 'Bad', 'Needs Repair') THEN 'Unavailable' 
+                                                             WHEN @status = 'Lost' THEN 'Unavailable'
                                                              ELSE 'Available' 
                                                          END
                                              WHERE VehicleID = @VehicleID";
@@ -153,14 +151,19 @@ namespace CarRentalManagementSystem._Forms
                     }
                 }
 
-                if (status == "Damaged")
+                if (status == "Damaged" || conditionAfter == "Damaged" || conditionAfter == "VeryBad" || conditionAfter == "Very Bad" || conditionAfter == "Bad")
                 {
-                    MessageBox.Show($"A damage fee of ₱{damageFee} has been charged to the client.", "Damage Fee", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show($"The vehicle {vehicleName} condition was recorded as '{conditionAfter}'. It has been marked as 'Unavailable' for maintenance.", "Vehicle Maintenance", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
 
-                MessageBox.Show("Vehicle returned successfully!", "Success");
-                dashboard.LoadDashboardData();
-                Rentals.LoadRentData();
+                if (status == "Damaged")
+                {
+                    MessageBox.Show($"A damage fee of ₱{damageFee:N2} has been charged to the client.", "Damage Fee", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+
+                MessageBox.Show("Vehicle returned successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                this.DialogResult = DialogResult.OK;
                 this.Close();
             }
             catch (Exception ex)

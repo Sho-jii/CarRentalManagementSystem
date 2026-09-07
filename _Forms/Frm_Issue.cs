@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,9 +14,6 @@ namespace CarRentalManagementSystem._Forms
 {
     public partial class Frm_Issue : Form
     {
-        Page_Dashboard dashboard = new Page_Dashboard();
-        Page_Rental Rentals = new Page_Rental();
-
         public int returnClientID {  get; set; }
         private int ClientID;
         private int VehicleID;
@@ -43,7 +40,7 @@ namespace CarRentalManagementSystem._Forms
         }
         private void Frm_Issue_Load(object sender, EventArgs e)
         {
-            txtDHP.Text = DailyHirePrice.ToString();
+            txtDHP.Text = DailyHirePrice.ToString("F2");
         }
         private void btnSave_Click(object sender, EventArgs e)
         {
@@ -54,7 +51,6 @@ namespace CarRentalManagementSystem._Forms
                 DateTime rentDate = dtpRentDate.Value;
                 string status = "In-Possession";
                 int days = 1;
-                decimal total = DailyHirePrice;
                 decimal additionalFee = 0;
                 DateTime currentDate = DateTime.Now.Date;
 
@@ -64,15 +60,17 @@ namespace CarRentalManagementSystem._Forms
                     int extraDays = (rentDate - currentDate).Days;
                     additionalFee = extraDays * 200; 
                     MessageBox.Show(
-                        $"The selected Rent Date is in the future. There will be a PHP {additionalFee} fee for {extraDays} extra day(s).",
-                        "Notice",
+                        $"The selected Rent Date is in the future. There will be a PHP {additionalFee:N2} fee for {extraDays} extra day(s).",
+                        "Advance Booking Notice",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Information
                     );
                 }
 
+                decimal total = DailyHirePrice + additionalFee;
+
                 DialogResult confirmation = MessageBox.Show(
-                    "Are you sure you want to rent this vehicle? This action cannot be undone.",
+                    $"Are you sure you want to rent this vehicle? Total initial fee: PHP {total:N2}.",
                     "Confirm Rental",
                     MessageBoxButtons.YesNo,
                     MessageBoxIcon.Question
@@ -109,14 +107,9 @@ namespace CarRentalManagementSystem._Forms
                     db.Execute("UPDATE clientProfiles SET Orders = Orders + 1, In_Possession = In_Possession + 1 WHERE ClientID = @ClientID",
                         new Dictionary<string, object> { { "@ClientID", ClientID } });
 
-                    MessageBox.Show("Vehicle issued successfully!", "Success");
+                    MessageBox.Show("Vehicle issued successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    dashboard.LoadDashboardData();
-                    Rentals.LoadAllRentData();
-
-                    Frm_ReturnWizard returnWizard = Application.OpenForms.OfType<Frm_ReturnWizard>().FirstOrDefault();
-                    returnWizard?.LoadReturnVehicle();
-
+                    this.DialogResult = DialogResult.OK;
                     this.Close();
                 }
             }

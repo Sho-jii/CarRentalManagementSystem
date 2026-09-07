@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -102,12 +102,16 @@ namespace CarRentalManagementSystem._Forms
         {
             if (rentalId == 0)
             {
-                MessageBox.Show("Please select a vehicle to return!");
+                MessageBox.Show("Please select a vehicle to return!", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             Frm_Return returnDetailsForm = new Frm_Return(rentalId, clientId, vehicleId, condition, rentDate, dailyHirePrice, days, total, vehicleModel);
-            returnDetailsForm.ShowDialog();           
+            if (returnDetailsForm.ShowDialog() == DialogResult.OK)
+            {
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+            }
         }
 
         private void Frm_ReturnWizard_Load(object sender, EventArgs e)

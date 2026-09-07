@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,11 +14,9 @@ namespace CarRentalManagementSystem._Forms
 {
     public partial class Frm_Login : Form
     {
-        private readonly Database _db;
         public Frm_Login()
         {
             InitializeComponent();
-            _db = new Database();
         }
 
         private void linkBack_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -64,13 +62,21 @@ namespace CarRentalManagementSystem._Forms
         {
             if (!ValidateInputLogin()) return;
 
-            string query = "SELECT Status FROM CarRentalUsers WHERE Username = @username AND Password = @password";
+            string username = txtUsername.Text.Trim();
+            string password = txtPass.Text.Trim();
+
+            string query = "SELECT Status FROM CarRentalUsers WHERE LTRIM(RTRIM(Username)) = @username AND LTRIM(RTRIM(Password)) = @password";
             var parameters = new Dictionary<string, object>
             {
-                { "@username", txtUsername.Text },
-                { "@password", txtPass.Text }
+                { "@username", username },
+                { "@password", password }
             };
-            string userStatus = _db.Scalar(query, parameters);
+
+            string userStatus = string.Empty;
+            using (var db = new Database())
+            {
+                userStatus = db.Scalar(query, parameters);
+            }
 
             if (!string.IsNullOrEmpty(userStatus))
             {
@@ -81,6 +87,7 @@ namespace CarRentalManagementSystem._Forms
 
                 // Pass the status to the main form
                 MainForm mainForm = new MainForm(isActive);
+                mainForm.FormClosed += (s, args) => this.Close();
                 mainForm.Show();
                 this.Hide();
             }
@@ -92,28 +99,35 @@ namespace CarRentalManagementSystem._Forms
         private void btnRegister_Click(object sender, EventArgs e)
         {
             if (!ValidateInputRegister()) return;
-            string checkQuery = "SELECT COUNT(*) FROM CarRentalUsers WHERE Username = @username";
+
+            string username = txtRegUsername.Text.Trim();
+            string password = txtRegPass.Text.Trim();
+
+            string checkQuery = "SELECT COUNT(*) FROM CarRentalUsers WHERE LTRIM(RTRIM(Username)) = @username";
             var checkParameters = new Dictionary<string, object>
-        {
-            { "@username", txtRegUsername.Text }
-        };
-
-            string userExists = _db.Scalar(checkQuery, checkParameters);
-
-            if (int.Parse(userExists) > 0)
             {
-                MessageBox.Show("Username already exists!", "Registration Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
+                { "@username", username }
+            };
+
+            using (var db = new Database())
+            {
+                string userExists = db.Scalar(checkQuery, checkParameters);
+
+                if (int.Parse(userExists) > 0)
+                {
+                    MessageBox.Show("Username already exists!", "Registration Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                string insertQuery = "INSERT INTO CarRentalUsers (Username, Password, Status) VALUES (@username, @password, 'Inactive')";
+                var insertParameters = new Dictionary<string, object>
+                {
+                    { "@username", username },
+                    { "@password", password }
+                };
+
+                db.Execute(insertQuery, insertParameters);
             }
-
-            string insertQuery = "INSERT INTO CarRentalUsers (Username, Password, Status) VALUES (@username, @password, 'Inactive')";
-            var insertParameters = new Dictionary<string, object>
-        {
-            { "@username", txtRegUsername.Text },
-            { "@password", txtRegPass.Text }
-        };
-
-            _db.Execute(insertQuery, insertParameters);
 
             MessageBox.Show("Registration successful! Your account is now inactive and requires admin approval.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             loginPanel.BringToFront();

@@ -1,33 +1,26 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Drawing.Printing;
 using System.Linq;
-using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using CarRentalManagementSystem._Models;
-using ServiceStack.Text;
-using ServiceStack;
-using static System.ComponentModel.Design.ObjectSelectorEditor;
-using ServiceStack.OrmLite;
 using CarRentalManagementSystem._Forms;
 
 namespace CarRentalManagementSystem._Pages
 {
     public partial class Page_Report : UserControl
     {
-        
         public Page_Report()
         {
             InitializeComponent();
         }
         private async void cmbReportOptions_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string selectedOption = cmbReportOptions.SelectedItem.ToString();
+            string selectedOption = cmbReportOptions.SelectedItem?.ToString();
 
             if (selectedOption == "Vehicle Report")
             {
@@ -113,7 +106,7 @@ namespace CarRentalManagementSystem._Pages
 
         private async void txtSearch_TextChanged(object sender, EventArgs e)
         {
-            string selectedOption = cmbReportOptions.SelectedItem.ToString();
+            string selectedOption = cmbReportOptions.SelectedItem?.ToString() ?? "Vehicle Report";
             string searchText = txtSearch.Text.Trim();
 
             if (string.IsNullOrEmpty(searchText))

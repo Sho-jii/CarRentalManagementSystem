@@ -1,4 +1,4 @@
-﻿namespace CarRentalManagementSystem._Pages
+namespace CarRentalManagementSystem._Pages
 {
     partial class Page_Report
     {
@@ -42,19 +42,11 @@
             this.dgvReportV = new Guna.UI2.WinForms.Guna2DataGridView();
             this.VehicleReport = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.printDocument1 = new System.Drawing.Printing.PrintDocument();
-            this.car_rentalDataSet = new CarRentalManagementSystem.car_rentalDataSet();
-            this.vehicleInventoryBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.vehicleInventoryTableAdapter = new CarRentalManagementSystem.car_rentalDataSetTableAdapters.vehicleInventoryTableAdapter();
             this.btnRefresh = new Guna.UI2.WinForms.Guna2Button();
             this.dgvReportC = new Guna.UI2.WinForms.Guna2DataGridView();
             this.ClientReport = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fKvehicleReVehic01142BA1BindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.vehicleRentalsTableAdapter = new CarRentalManagementSystem.car_rentalDataSetTableAdapters.vehicleRentalsTableAdapter();
             ((System.ComponentModel.ISupportInitialize)(this.dgvReportV)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.car_rentalDataSet)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.vehicleInventoryBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvReportC)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fKvehicleReVehic01142BA1BindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // cmbReportOptions
@@ -182,20 +174,6 @@
             this.VehicleReport.Name = "VehicleReport";
             this.VehicleReport.ReadOnly = true;
             // 
-            // car_rentalDataSet
-            // 
-            this.car_rentalDataSet.DataSetName = "car_rentalDataSet";
-            this.car_rentalDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // vehicleInventoryBindingSource
-            // 
-            this.vehicleInventoryBindingSource.DataMember = "vehicleInventory";
-            this.vehicleInventoryBindingSource.DataSource = this.car_rentalDataSet;
-            // 
-            // vehicleInventoryTableAdapter
-            // 
-            this.vehicleInventoryTableAdapter.ClearBeforeFill = true;
-            // 
             // btnRefresh
             // 
             this.btnRefresh.Animated = true;
@@ -289,14 +267,6 @@
             this.ClientReport.Name = "ClientReport";
             this.ClientReport.ReadOnly = true;
             // 
-            // fKvehicleReVehic01142BA1BindingSource
-            // 
-            this.fKvehicleReVehic01142BA1BindingSource.DataMember = "FK__vehicleRe__Vehic__01142BA1";
-            this.fKvehicleReVehic01142BA1BindingSource.DataSource = this.vehicleInventoryBindingSource;
-            // 
-            // vehicleRentalsTableAdapter
-            // 
-            this.vehicleRentalsTableAdapter.ClearBeforeFill = true;
             // 
             // Page_Report
             // 
@@ -314,10 +284,7 @@
             this.Size = new System.Drawing.Size(1071, 710);
             this.Load += new System.EventHandler(this.Page_Report_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvReportV)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.car_rentalDataSet)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.vehicleInventoryBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvReportC)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fKvehicleReVehic01142BA1BindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -328,14 +295,9 @@
         private Guna.UI2.WinForms.Guna2TextBox txtSearch;
         private Guna.UI2.WinForms.Guna2DataGridView dgvReportV;
         private System.Drawing.Printing.PrintDocument printDocument1;
-        private System.Windows.Forms.BindingSource vehicleInventoryBindingSource;
-        private car_rentalDataSet car_rentalDataSet;
-        private car_rentalDataSetTableAdapters.vehicleInventoryTableAdapter vehicleInventoryTableAdapter;
         private Guna.UI2.WinForms.Guna2Button btnRefresh;
         private Guna.UI2.WinForms.Guna2DataGridView dgvReportC;
         private System.Windows.Forms.DataGridViewTextBoxColumn VehicleReport;
         private System.Windows.Forms.DataGridViewTextBoxColumn ClientReport;
-        private System.Windows.Forms.BindingSource fKvehicleReVehic01142BA1BindingSource;
-        private car_rentalDataSetTableAdapters.vehicleRentalsTableAdapter vehicleRentalsTableAdapter;
     }
 }

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,7 +14,6 @@ namespace CarRentalManagementSystem._Forms
 {
     public partial class Frm_Vehicle : Form
     {
-        Page_Dashboard dashboard = new Page_Dashboard();
         private int? vehicleID;
         public Frm_Vehicle()
         {
@@ -47,6 +46,7 @@ namespace CarRentalManagementSystem._Forms
                 string.IsNullOrWhiteSpace(txtYOM.Text) ||
                 string.IsNullOrWhiteSpace(txtColor.Text) ||
                 string.IsNullOrWhiteSpace(txtCapacity.Text) ||
+                string.IsNullOrWhiteSpace(txtDailyHirePrice.Text) ||
                 txtFuelType.SelectedIndex == -1 ||
                 txtTransmission.SelectedIndex == -1 ||
                 txtCondition.SelectedIndex == -1 ||
@@ -55,6 +55,18 @@ namespace CarRentalManagementSystem._Forms
                 MessageBox.Show("All fields must be filled.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
+
+            string selectedStatus = txtStatus.SelectedItem?.ToString();
+            string selectedCondition = txtCondition.SelectedItem?.ToString();
+
+            // Prevent setting status to Available if the vehicle is damaged / bad condition
+            if (selectedStatus == "Available" && 
+                (selectedCondition == "Damaged" || selectedCondition == "VeryBad" || selectedCondition == "Very Bad" || selectedCondition == "Bad"))
+            {
+                MessageBox.Show("A vehicle with damaged or poor condition cannot be set to 'Available'. Please set status to 'Unavailable' until it is repaired.", "Invalid Status", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+
             return true;
         }
         private void btnSave_Click(object sender, EventArgs e)
@@ -109,7 +121,7 @@ namespace CarRentalManagementSystem._Forms
                     if (rowsAffected > 0)
                     {
                         MessageBox.Show("Vehicle saved successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        dashboard.LoadDashboardData();
+                        this.DialogResult = DialogResult.OK;
                         this.Close();
                     }
                     else

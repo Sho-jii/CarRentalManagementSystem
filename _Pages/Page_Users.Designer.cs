@@ -1,4 +1,4 @@
-﻿namespace CarRentalManagementSystem._Pages
+namespace CarRentalManagementSystem._Pages
 {
     partial class Page_Users
     {
@@ -37,9 +37,6 @@
             this.cmbStatus = new Guna.UI2.WinForms.Guna2ComboBox();
             this.txtSearch = new Guna.UI2.WinForms.Guna2TextBox();
             this.btnRefresh = new Guna.UI2.WinForms.Guna2Button();
-            this.car_rentalDataSet2 = new CarRentalManagementSystem.car_rentalDataSet2();
-            this.carRentalUsersBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.carRentalUsersTableAdapter = new CarRentalManagementSystem.car_rentalDataSet2TableAdapters.CarRentalUsersTableAdapter();
             this.dgvUsers = new Guna.UI2.WinForms.Guna2DataGridView();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -47,8 +44,6 @@
             this.statusDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Edit = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Delete = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            ((System.ComponentModel.ISupportInitialize)(this.car_rentalDataSet2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.carRentalUsersBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsers)).BeginInit();
             this.SuspendLayout();
             // 
@@ -150,20 +145,6 @@
             this.btnRefresh.TabIndex = 79;
             this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
-            // car_rentalDataSet2
-            // 
-            this.car_rentalDataSet2.DataSetName = "car_rentalDataSet2";
-            this.car_rentalDataSet2.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // carRentalUsersBindingSource
-            // 
-            this.carRentalUsersBindingSource.DataMember = "CarRentalUsers";
-            this.carRentalUsersBindingSource.DataSource = this.car_rentalDataSet2;
-            // 
-            // carRentalUsersTableAdapter
-            // 
-            this.carRentalUsersTableAdapter.ClearBeforeFill = true;
-            // 
             // dgvUsers
             // 
             this.dgvUsers.AllowUserToAddRows = false;
@@ -192,7 +173,6 @@
             this.Edit,
             this.Delete});
             this.dgvUsers.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.dgvUsers.DataSource = this.carRentalUsersBindingSource;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(212)))), ((int)(((byte)(172)))), ((int)(((byte)(65)))));
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Franklin Gothic Medium", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -300,8 +280,6 @@
             this.Name = "Page_Users";
             this.Size = new System.Drawing.Size(1071, 710);
             this.Load += new System.EventHandler(this.Page_Users_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.car_rentalDataSet2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.carRentalUsersBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsers)).EndInit();
             this.ResumeLayout(false);
 
@@ -316,9 +294,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn userIDDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn usernameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn passwordDataGridViewTextBoxColumn;
-        private System.Windows.Forms.BindingSource carRentalUsersBindingSource;
-        private car_rentalDataSet2 car_rentalDataSet2;
-        private car_rentalDataSet2TableAdapters.CarRentalUsersTableAdapter carRentalUsersTableAdapter;
         private Guna.UI2.WinForms.Guna2DataGridView dgvUsers;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;

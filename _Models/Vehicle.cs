@@ -1,23 +1,19 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Data;
-using CarRentalManagementSystem._Forms;
-using System.Web.UI;
-using CarRentalManagementSystem._Pages;
 using System.Windows.Forms;
 
 namespace CarRentalManagementSystem._Models
 {
     internal class Vehicle 
     {
-        private Database db;
         public Vehicle() 
         {
-            db = new Database();
         }
+
         public void DeleteVehicle(string model, int vehicleId)
         {
             DialogResult result = MessageBox.Show($"Are you sure you want to remove {model}?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
@@ -32,90 +28,107 @@ namespace CarRentalManagementSystem._Models
                 }
             }
         }
+
         public DataTable LoadVehiclesByTransmission(string transmission, string searchText)
         {
             try
             {
                 string sql = "SELECT * FROM vehicleInventory WHERE Transmission = @Transmission AND Model LIKE @SearchText";
 
-                // Using parameters to prevent SQL injection
                 var parameters = new Dictionary<string, object>
-            {
-                { "@Transmission", transmission },
-                { "@SearchText", "%" + searchText + "%" }  // The "%" allows for partial matching of the model name
-            };
+                {
+                    { "@Transmission", transmission },
+                    { "@SearchText", "%" + searchText + "%" }
+                };
 
-                // Execute the query with parameters
-                return db.Select(sql, parameters);
+                using (var db = new Database())
+                {
+                    return db.Select(sql, parameters);
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error loading vehicles: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return new DataTable(); // Return an empty DataTable in case of an error
+                return new DataTable();
             }
         }
+
         public DataTable LoadVehiclesBySearch(string searchText)
         {
             try
             {
                 string sql = "SELECT * FROM vehicleInventory WHERE Model LIKE @SearchText";
 
-                // Using parameters to prevent SQL injection
                 var parameters = new Dictionary<string, object>
-            {
-                { "@SearchText", "%" + searchText + "%" } // Partial matching for the model name
-            };
+                {
+                    { "@SearchText", "%" + searchText + "%" }
+                };
 
-                // Execute the query with parameters and return the result
-                return db.Select(sql, parameters);
+                using (var db = new Database())
+                {
+                    return db.Select(sql, parameters);
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error loading vehicles by search: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return new DataTable(); // Return an empty DataTable in case of an error
+                return new DataTable();
             }
         }
+
         public DataTable LoadVehiclesByTransmissionAvail(string transmission, string searchText)
         {
             try
             {
-                string sql = "SELECT * FROM vehicleInventory WHERE Status = 'Available' AND Transmission = @Transmission AND Model LIKE @SearchText";
+                // Only return vehicles that are Available and NOT in damaged/bad condition
+                string sql = @"SELECT * FROM vehicleInventory 
+                               WHERE Status = 'Available' 
+                                 AND Condition NOT IN ('Damaged', 'VeryBad', 'Very Bad', 'Bad', 'Needs Repair') 
+                                 AND Transmission = @Transmission 
+                                 AND Model LIKE @SearchText";
 
-                // Using parameters to prevent SQL injection
                 var parameters = new Dictionary<string, object>
-            {
-                { "@Transmission", transmission },
-                { "@SearchText", searchText + "%" }  // The "%" allows for partial matching of the model name
-            };
+                {
+                    { "@Transmission", transmission },
+                    { "@SearchText", "%" + searchText + "%" }
+                };
 
-                // Execute the query with parameters
-                return db.Select(sql, parameters);
+                using (var db = new Database())
+                {
+                    return db.Select(sql, parameters);
+                }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error loading vehicles: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return new DataTable(); // Return an empty DataTable in case of an error
+                MessageBox.Show("Error loading available vehicles: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return new DataTable();
             }
         }
+
         public DataTable LoadVehiclesBySearchAvail(string searchText)
         {
             try
             {
-                string sql = "SELECT * FROM vehicleInventory WHERE Status = 'Available' AND Model LIKE @SearchText";
+                // Only return vehicles that are Available and NOT in damaged/bad condition
+                string sql = @"SELECT * FROM vehicleInventory 
+                               WHERE Status = 'Available' 
+                                 AND Condition NOT IN ('Damaged', 'VeryBad', 'Very Bad', 'Bad', 'Needs Repair') 
+                                 AND Model LIKE @SearchText";
 
-                // Using parameters to prevent SQL injection
                 var parameters = new Dictionary<string, object>
-            {
-                { "@SearchText", searchText + "%" } // Partial matching for the model name
-            };
+                {
+                    { "@SearchText", "%" + searchText + "%" }
+                };
 
-                // Execute the query with parameters and return the result
-                return db.Select(sql, parameters);
+                using (var db = new Database())
+                {
+                    return db.Select(sql, parameters);
+                }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error loading vehicles by search: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return new DataTable(); // Return an empty DataTable in case of an error
+                MessageBox.Show("Error loading available vehicles by search: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return new DataTable();
             }
         }
 

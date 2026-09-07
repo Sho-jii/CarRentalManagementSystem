@@ -1,4 +1,4 @@
-﻿namespace CarRentalManagementSystem._Pages
+namespace CarRentalManagementSystem._Pages
 {
     partial class Page_Client
     {
@@ -47,17 +47,12 @@
             this.spentDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Edit = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Delete = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clientProfilesBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.car_rentalDataSet1 = new CarRentalManagementSystem.car_rentalDataSet1();
             this.txtSearch = new Guna.UI2.WinForms.Guna2TextBox();
             this.cmbGender = new Guna.UI2.WinForms.Guna2ComboBox();
             this.btnAdd = new Guna.UI2.WinForms.Guna2GradientButton();
-            this.clientProfilesTableAdapter = new CarRentalManagementSystem.car_rentalDataSet1TableAdapters.clientProfilesTableAdapter();
             this.refreshTable = new System.Windows.Forms.Timer(this.components);
             this.btnRefresh = new Guna.UI2.WinForms.Guna2Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClient)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.clientProfilesBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.car_rentalDataSet1)).BeginInit();
             this.SuspendLayout();
             // 
             // dgvClient
@@ -95,7 +90,6 @@
             this.Edit,
             this.Delete});
             this.dgvClient.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.dgvClient.DataSource = this.clientProfilesBindingSource;
             dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(212)))), ((int)(((byte)(172)))), ((int)(((byte)(65)))));
             dataGridViewCellStyle7.Font = new System.Drawing.Font("Franklin Gothic Medium", 10.2F);
@@ -248,15 +242,6 @@
             this.Delete.ReadOnly = true;
             this.Delete.Width = 84;
             // 
-            // clientProfilesBindingSource
-            // 
-            this.clientProfilesBindingSource.DataMember = "clientProfiles";
-            this.clientProfilesBindingSource.DataSource = this.car_rentalDataSet1;
-            // 
-            // car_rentalDataSet1
-            // 
-            this.car_rentalDataSet1.DataSetName = "car_rentalDataSet1";
-            this.car_rentalDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // txtSearch
             // 
@@ -336,10 +321,6 @@
             this.btnAdd.Text = "ADD";
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
-            // clientProfilesTableAdapter
-            // 
-            this.clientProfilesTableAdapter.ClearBeforeFill = true;
-            // 
             // refreshTable
             // 
             this.refreshTable.Tick += new System.EventHandler(this.refreshTable_Tick);
@@ -380,8 +361,6 @@
             this.Load += new System.EventHandler(this.Page_Client_Load);
             this.Leave += new System.EventHandler(this.Page_Client_Leave);
             ((System.ComponentModel.ISupportInitialize)(this.dgvClient)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.clientProfilesBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.car_rentalDataSet1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -391,9 +370,6 @@
         private Guna.UI2.WinForms.Guna2TextBox txtSearch;
         private Guna.UI2.WinForms.Guna2ComboBox cmbGender;
         private Guna.UI2.WinForms.Guna2GradientButton btnAdd;
-        private System.Windows.Forms.BindingSource clientProfilesBindingSource;
-        private car_rentalDataSet1 car_rentalDataSet1;
-        private car_rentalDataSet1TableAdapters.clientProfilesTableAdapter clientProfilesTableAdapter;
         private System.Windows.Forms.Timer refreshTable;
         private System.Windows.Forms.DataGridViewTextBoxColumn clientIDDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;

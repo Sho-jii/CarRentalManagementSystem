@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -159,10 +159,14 @@ namespace CarRentalManagementSystem._Models
                         vehicleInventory AS vi ON vr.VehicleID = vi.VehicleID
                     LEFT JOIN 
                         clientProfiles AS cp ON vr.ClientID = cp.ClientID
-                        WHERE vr.Status = '{statusTXT}'";
-             using (Database db = new Database())
+                        WHERE vr.Status = @Status";
+            using (Database db = new Database())
             {
-                return db.Select(sql);
+                var parameters = new Dictionary<string, object>
+                {
+                    { "@Status", statusTXT }
+                };
+                return db.Select(sql, parameters);
             }
         }
         public DataTable GetRentalDataBySearch(string searchText, string status)

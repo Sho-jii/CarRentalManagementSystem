@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -213,24 +213,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="car_rentalDataSet.cs">
-      <DependentUpon>car_rentalDataSet.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="car_rentalDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>car_rentalDataSet.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="car_rentalDataSet1.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>car_rentalDataSet1.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="car_rentalDataSet2.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>car_rentalDataSet2.xsd</DependentUpon>
-    </Compile>
     <Compile Include="car_rentalDataSet3.cs">
       <DependentUpon>car_rentalDataSet3.xsd</DependentUpon>
     </Compile>
@@ -411,39 +393,6 @@
       <DependentUpon>Page_Vehicle.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.manifest" />
-    <None Include="car_rentalDataSet.xsc">
-      <DependentUpon>car_rentalDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="car_rentalDataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>car_rentalDataSet.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="car_rentalDataSet.xss">
-      <DependentUpon>car_rentalDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="car_rentalDataSet1.xsc">
-      <DependentUpon>car_rentalDataSet1.xsd</DependentUpon>
-    </None>
-    <None Include="car_rentalDataSet1.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>car_rentalDataSet1.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="car_rentalDataSet1.xss">
-      <DependentUpon>car_rentalDataSet1.xsd</DependentUpon>
-    </None>
-    <None Include="car_rentalDataSet2.xsc">
-      <DependentUpon>car_rentalDataSet2.xsd</DependentUpon>
-    </None>
-    <None Include="car_rentalDataSet2.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>car_rentalDataSet2.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="car_rentalDataSet2.xss">
-      <DependentUpon>car_rentalDataSet2.xsd</DependentUpon>
-    </None>
     <None Include="car_rentalDataSet3.xsc">
       <DependentUpon>car_rentalDataSet3.xsd</DependentUpon>
     </None>
@@ -514,4 +463,5 @@
     </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="CompileLicxFiles" />
 </Project>

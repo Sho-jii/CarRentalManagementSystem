@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,7 +14,6 @@ namespace CarRentalManagementSystem._Forms
 {
     public partial class Frm_Users : Form
     {
-        Page_Users usersData = new Page_Users();
         private readonly Users _userManager;
 
         private int UserIds;
@@ -24,8 +23,7 @@ namespace CarRentalManagementSystem._Forms
         public Frm_Users(int id, string user, string pass, string status)
         {
             InitializeComponent();
-            var database = new Database();
-            _userManager = new Users(database);
+            _userManager = new Users();
             UserIds = id;
             Usernames = user;
             Passwords = pass;
@@ -40,8 +38,7 @@ namespace CarRentalManagementSystem._Forms
         public Frm_Users()
         {
             InitializeComponent();
-            var database = new Database();
-            _userManager = new Users(database);
+            _userManager = new Users();
             btnSave.Text = "SAVE";
         }
         private void ClearFields()
@@ -76,8 +73,7 @@ namespace CarRentalManagementSystem._Forms
                 if (_userManager.AddUser(newUser))
                 {
                     MessageBox.Show("User added successfully!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    ClearFields();
-                    usersData.DisplayAllUsers();
+                    this.DialogResult = DialogResult.OK;
                     this.Close();
                 }
                 else
@@ -105,8 +101,7 @@ namespace CarRentalManagementSystem._Forms
 
                     _userManager.UpdateUser(updatedUser);
                     MessageBox.Show("User updated successfully!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    ClearFields();
-                    usersData.DisplayAllUsers();
+                    this.DialogResult = DialogResult.OK;
                     this.Close();
                 }
             }

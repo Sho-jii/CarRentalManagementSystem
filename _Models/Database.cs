@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,12 +16,59 @@ namespace CarRentalManagementSystem._Models
         SqlCommand sqlcom;
         private readonly string constring;
 
-        private readonly string localDBFilePath = @"C:\Users\Jarib\source\repos\CarRentalManagementSystem\car_rental.mdf";
+        private static string GetConnectionString()
+        {
+            string[] searchRoots = new string[]
+            {
+                AppDomain.CurrentDomain.BaseDirectory,
+                System.IO.Path.GetDirectoryName(typeof(Database).Assembly.Location)
+            };
+
+            string mdfPath = null;
+
+            foreach (var root in searchRoots)
+            {
+                if (string.IsNullOrEmpty(root)) continue;
+
+                string current = root;
+                for (int i = 0; i < 5; i++)
+                {
+                    string candidate = System.IO.Path.Combine(current, "car_rental.mdf");
+                    if (System.IO.File.Exists(candidate))
+                    {
+                        mdfPath = System.IO.Path.GetFullPath(candidate);
+                        break;
+                    }
+                    var parent = System.IO.Directory.GetParent(current);
+                    if (parent == null) break;
+                    current = parent.FullName;
+                }
+
+                if (mdfPath != null) break;
+            }
+
+            if (mdfPath != null && System.IO.File.Exists(mdfPath))
+            {
+                AppDomain.CurrentDomain.SetData("DataDirectory", System.IO.Path.GetDirectoryName(mdfPath));
+                return $@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename={mdfPath};Integrated Security=True;Connect Timeout=30;";
+            }
+
+            try
+            {
+                var setting = System.Configuration.ConfigurationManager.ConnectionStrings["CarRentalManagementSystem.Properties.Settings.car_rentalConnectionString"];
+                if (setting != null && !string.IsNullOrWhiteSpace(setting.ConnectionString))
+                {
+                    return setting.ConnectionString;
+                }
+            }
+            catch { }
+
+            return $@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\car_rental.mdf;Integrated Security=True;Connect Timeout=30;";
+        }
 
         public Database()
         {
-            // for opening a connection to the sql server
-            constring = String.Format("data source=(LocalDB)\\MSSQLLocalDB;attachdbfilename={0};integrated security=true;", localDBFilePath);
+            constring = GetConnectionString();
             sqlcon = new SqlConnection(constring);
             sqlcon.Open();
         }

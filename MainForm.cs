@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -75,16 +75,34 @@ namespace CarRentalManagementSystem
             dashboardBtn.PerformClick();
         }
 
+        private void RefreshAllPages()
+        {
+            try
+            {
+                page_Dashboard1.LoadDashboardData();
+                page_Rental1.LoadAllRentData();
+                page_Vehicle1.loadVehicles();
+                page_Clients.loadClients();
+            }
+            catch { }
+        }
+
         private void issueBtn_Click(object sender, EventArgs e)
         {
             Frm_IssueWizard issueWizard = new Frm_IssueWizard();
-            issueWizard.ShowDialog(); 
+            if (issueWizard.ShowDialog() == DialogResult.OK)
+            {
+                RefreshAllPages();
+            }
         }
 
         private void returnBtn_Click(object sender, EventArgs e)
         {
             Frm_ReturnWizard returnWizard = new Frm_ReturnWizard();
-            returnWizard.ShowDialog();
+            if (returnWizard.ShowDialog() == DialogResult.OK)
+            {
+                RefreshAllPages();
+            }
         }
         private void btnUsers_Click(object sender, EventArgs e)
         {

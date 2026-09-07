@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using CarRentalManagementSystem._Pages;
 using CarRentalManagementSystem._Models;
-using System.Web.UI.WebControls;
+
 namespace CarRentalManagementSystem._Forms
 {
     public partial class Frm_IssueWizard : Form
@@ -38,7 +38,10 @@ namespace CarRentalManagementSystem._Forms
         }
         private void LoadAvailableVehicles()
         {
-            string sql = "SELECT * FROM vehicleInventory WHERE Status = 'Available'";
+            // Only load vehicles that are Available and not damaged/in bad condition
+            string sql = @"SELECT * FROM vehicleInventory 
+                           WHERE Status = 'Available' 
+                             AND Condition NOT IN ('Damaged', 'VeryBad', 'Very Bad', 'Bad', 'Needs Repair')";
             using (Database db = new Database())
             {
                 dgvVehicles.DataSource = db.Select(sql);
@@ -50,7 +53,7 @@ namespace CarRentalManagementSystem._Forms
         {
             if (selectedClientID == 0)
             {
-                MessageBox.Show("Please select a client!");
+                MessageBox.Show("Please select a client!", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             issueVehicles.Visible = true;
@@ -69,11 +72,23 @@ namespace CarRentalManagementSystem._Forms
         {
             if (selectedClientID == 0 || selectedVehicleID == 0)
             {
-                MessageBox.Show("Please select the vehicle!");
+                MessageBox.Show("Please select the vehicle!", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+
+            // Extra safety guard: verify vehicle condition is not damaged
+            if (selectedCondition == "Damaged" || selectedCondition == "VeryBad" || selectedCondition == "Very Bad" || selectedCondition == "Bad")
+            {
+                MessageBox.Show("This vehicle cannot be rented because it is damaged or in poor condition.", "Rental Blocked", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             Frm_Issue rentForm = new Frm_Issue(selectedClientID, selectedVehicleID, selectedModel, selectedClientName, selectedDailyHirePrice, selectedCondition);
-            rentForm.ShowDialog();
+            if (rentForm.ShowDialog() == DialogResult.OK)
+            {
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+            }
         }
 
         private void Frm_IssueWizard_FormClosing(object sender, FormClosingEventArgs e)

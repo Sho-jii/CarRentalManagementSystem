@@ -1,4 +1,4 @@
-﻿namespace CarRentalManagementSystem._Forms
+namespace CarRentalManagementSystem._Forms
 {
     partial class Frm_ReturnWizard
     {
@@ -59,15 +59,10 @@
             this.statusDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.returnDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dateAddedDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.vehicleRentalsBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.car_rentalDataSet = new CarRentalManagementSystem.car_rentalDataSet();
             this.refreshTable = new System.Windows.Forms.Timer(this.components);
-            this.vehicleRentalsTableAdapter = new CarRentalManagementSystem.car_rentalDataSetTableAdapters.vehicleRentalsTableAdapter();
             this.panelDrag.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRentals)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.vehicleRentalsBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.car_rentalDataSet)).BeginInit();
             this.SuspendLayout();
             // 
             // dragControlForm
@@ -246,7 +241,6 @@
             this.returnDateDataGridViewTextBoxColumn,
             this.dateAddedDataGridViewTextBoxColumn});
             this.dgvRentals.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.dgvRentals.DataSource = this.vehicleRentalsBindingSource;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Franklin Gothic Medium", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -419,20 +413,6 @@
             this.dateAddedDataGridViewTextBoxColumn.ReadOnly = true;
             this.dateAddedDataGridViewTextBoxColumn.Visible = false;
             // 
-            // vehicleRentalsBindingSource
-            // 
-            this.vehicleRentalsBindingSource.DataMember = "vehicleRentals";
-            this.vehicleRentalsBindingSource.DataSource = this.car_rentalDataSet;
-            // 
-            // car_rentalDataSet
-            // 
-            this.car_rentalDataSet.DataSetName = "car_rentalDataSet";
-            this.car_rentalDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // vehicleRentalsTableAdapter
-            // 
-            this.vehicleRentalsTableAdapter.ClearBeforeFill = true;
-            // 
             // Frm_ReturnWizard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -454,8 +434,6 @@
             this.panelDrag.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRentals)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.vehicleRentalsBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.car_rentalDataSet)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -473,9 +451,6 @@
         private Guna.UI2.WinForms.Guna2Button btnRefresh;
         private Guna.UI2.WinForms.Guna2DataGridView dgvRentals;
         private System.Windows.Forms.Timer refreshTable;
-        private car_rentalDataSet car_rentalDataSet;
-        private System.Windows.Forms.BindingSource vehicleRentalsBindingSource;
-        private car_rentalDataSetTableAdapters.vehicleRentalsTableAdapter vehicleRentalsTableAdapter;
         private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn vehicleIDDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn clientIDDataGridViewTextBoxColumn;

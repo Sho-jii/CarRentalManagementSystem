@@ -1,8 +1,10 @@
-﻿CREATE TABLE [dbo].[CarRentalUsers] (
+
+
+CREATE TABLE [dbo].[CarRentalUsers] (
     [UserID]   INT          IDENTITY (1, 1) NOT NULL,
-    [Username] NCHAR (15)   NOT NULL,
-    [Password] NCHAR (15)   NOT NULL,
-    [Status]   VARCHAR (50) NOT NULL,
+    [Username] VARCHAR (100) NOT NULL,
+    [Password] VARCHAR (100) NOT NULL,
+    [Status]   VARCHAR (50)  NOT NULL,
     PRIMARY KEY CLUSTERED ([UserID] ASC)
 );
 
@@ -515,3 +517,15 @@ LEFT JOIN
     clientProfiles AS cp ON vr.ClientID = cp.ClientID;
 
 
+
+
+-- Fix any vehicles marked 'Available' that are currently in damaged or poor condition:
+UPDATE vehicleInventory
+SET Status = 'Unavailable'
+WHERE Status = 'Available'
+  AND Condition IN ('Damaged', 'VeryBad', 'Very Bad', 'Bad', 'Needs Repair');
+
+-- View all vehicles and their status & condition:
+SELECT VehicleID, Model, Registration, Status, Condition, DailyHirePrice 
+FROM vehicleInventory 
+ORDER BY Status ASC, Condition ASC;

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -23,7 +23,7 @@ namespace CarRentalManagementSystem._Pages
             InitializeComponent();
             loadVehicles();
         }
-        private void loadVehicles()
+        public void loadVehicles()
         {
             try
             {
@@ -89,6 +89,10 @@ namespace CarRentalManagementSystem._Pages
                 {
                     e.CellStyle.ForeColor = System.Drawing.Color.Crimson;
                 }
+                else if (status == "Unavailable")
+                {
+                    e.CellStyle.ForeColor = System.Drawing.Color.DarkOrange;
+                }
             }
         }
         private void dgvVehicles_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -116,7 +120,10 @@ namespace CarRentalManagementSystem._Pages
                 DateTime dateAdded = Convert.ToDateTime(dgvVehicles.Rows[e.RowIndex].Cells[11].Value);
 
                 Frm_Vehicle editForm = new Frm_Vehicle(vehicleID, model, registration, getStatus, yom, color, capacity, fuelType, transmission, dailyPrice, condition, dateAdded);
-                editForm.ShowDialog();
+                if (editForm.ShowDialog() == DialogResult.OK)
+                {
+                    loadVehicles();
+                }
             }
             else if (e.ColumnIndex == dgvVehicles.Columns["Delete"].Index && e.RowIndex >= 0)
             {
@@ -128,13 +135,17 @@ namespace CarRentalManagementSystem._Pages
                 {
                     int vehicleID = Convert.ToInt32(dgvVehicles.Rows[e.RowIndex].Cells[0].Value);
                     classVehicle.DeleteVehicle(modelname, vehicleID);
+                    loadVehicles();
                 }
             }
         }
         private void btnAdd_Click(object sender, EventArgs e)
         {
             Frm_Vehicle addVehicleForm = new Frm_Vehicle();
-            addVehicleForm.ShowDialog();
+            if (addVehicleForm.ShowDialog() == DialogResult.OK)
+            {
+                loadVehicles();
+            }
         }
 
         private void btnRefresh_Click(object sender, EventArgs e)

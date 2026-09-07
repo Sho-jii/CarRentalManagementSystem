@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,9 +15,7 @@ namespace CarRentalManagementSystem._Pages
 {
     public partial class Page_Rental : UserControl
     {
-        private Database db;
         Rental rental = new Rental();
-        Page_Dashboard dashboard = new Page_Dashboard();
         public Page_Rental()
         {
             InitializeComponent();
@@ -59,7 +57,6 @@ namespace CarRentalManagementSystem._Pages
         public void LoadAllRentData()
         {
             LoadFilteredData();
-            dashboard.LoadDashboardData();
         }
         private void Page_Rental_Load(object sender, EventArgs e)
         {
@@ -192,7 +189,7 @@ namespace CarRentalManagementSystem._Pages
                     {
                         try
                         {
-                            using (db = new Database())
+                            using (var db = new Database())
                             {
                                 string deleteQuery = "DELETE FROM vehicleRentals WHERE Id = @rentalId";
                                 var parameters = new Dictionary<string, object>

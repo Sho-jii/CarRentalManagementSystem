@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -72,7 +72,10 @@ namespace CarRentalManagementSystem._Pages
         private void btnAdd_Click(object sender, EventArgs e)
         {
             Frm_Users addUser = new Frm_Users();
-            addUser.ShowDialog();
+            if (addUser.ShowDialog() == DialogResult.OK)
+            {
+                DisplayAllUsers();
+            }
         }
         private void dgvUsers_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
         {
@@ -84,7 +87,10 @@ namespace CarRentalManagementSystem._Pages
                 string status = dgvUsers.Rows[e.RowIndex].Cells[3].Value.ToString();
 
                 Frm_Users editUser = new Frm_Users(userid, username, password, status);
-                editUser.ShowDialog();
+                if (editUser.ShowDialog() == DialogResult.OK)
+                {
+                    DisplayAllUsers();
+                }
             }
             else if (e.ColumnIndex == dgvUsers.Columns["Delete"].Index && e.RowIndex >= 0)
             {
@@ -99,6 +105,7 @@ namespace CarRentalManagementSystem._Pages
                     {
                         db.Execute(sql, new Dictionary<string, object> { { "@UserID", userid } });
                         MessageBox.Show("User deleted successfully.", "Deleted", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        DisplayAllUsers();
                     }
                 }
             }

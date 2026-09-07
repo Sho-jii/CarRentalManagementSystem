@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,7 +14,6 @@ namespace CarRentalManagementSystem._Forms
 {
     public partial class Frm_Client : Form
     {
-        Page_Dashboard dashboard = new Page_Dashboard();
         private int? clientId;
         public Frm_Client()
         {
@@ -89,8 +88,8 @@ namespace CarRentalManagementSystem._Forms
                         if (rowsAffected > 0)
                         {
                             MessageBox.Show("Client added successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            ClearInputFields(); // Clear the input fields after insertion
-                            dashboard.LoadDashboardData();
+                            this.DialogResult = DialogResult.OK;
+                            this.Close();
                         }
                         else
                         {
@@ -120,6 +119,7 @@ namespace CarRentalManagementSystem._Forms
                         if (rowsAffected > 0)
                         {
                             MessageBox.Show("Client updated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            this.DialogResult = DialogResult.OK;
                             this.Close(); // Close the form after updating
                         }
                         else

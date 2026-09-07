@@ -1,4 +1,4 @@
-﻿namespace CarRentalManagementSystem._Forms
+namespace CarRentalManagementSystem._Forms
 {
     partial class Frm_IssueWizard
     {
@@ -63,8 +63,6 @@
             this.dailyHirePriceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.conditionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dateAddedDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.vehicleInventoryBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.car_rentalDataSet11 = new CarRentalManagementSystem.car_rentalDataSet1();
             this.btnNext = new Guna.UI2.WinForms.Guna2GradientButton();
             this.cmbGender = new Guna.UI2.WinForms.Guna2ComboBox();
             this.txtSearch = new Guna.UI2.WinForms.Guna2TextBox();
@@ -81,10 +79,6 @@
             this.damagedDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lostDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.spentDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clientProfilesBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.car_rentalDataSet1 = new CarRentalManagementSystem.car_rentalDataSet1();
-            this.clientProfilesTableAdapter = new CarRentalManagementSystem.car_rentalDataSet1TableAdapters.clientProfilesTableAdapter();
-            this.vehicleInventoryTableAdapter = new CarRentalManagementSystem.car_rentalDataSet1TableAdapters.vehicleInventoryTableAdapter();
             this.borderlessForm = new Guna.UI2.WinForms.Guna2BorderlessForm(this.components);
             this.dragControlForm = new Guna.UI2.WinForms.Guna2DragControl(this.components);
             this.panelDrag.SuspendLayout();
@@ -92,11 +86,7 @@
             this.clientInfo.SuspendLayout();
             this.issueVehicles.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVehicles)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.vehicleInventoryBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.car_rentalDataSet11)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClient)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.clientProfilesBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.car_rentalDataSet1)).BeginInit();
             this.SuspendLayout();
             // 
             // panelDrag
@@ -342,7 +332,6 @@
             this.conditionDataGridViewTextBoxColumn,
             this.dateAddedDataGridViewTextBoxColumn});
             this.dgvVehicles.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.dgvVehicles.DataSource = this.vehicleInventoryBindingSource;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Franklin Gothic Medium", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -508,16 +497,6 @@
             this.dateAddedDataGridViewTextBoxColumn.Visible = false;
             this.dateAddedDataGridViewTextBoxColumn.Width = 150;
             // 
-            // vehicleInventoryBindingSource
-            // 
-            this.vehicleInventoryBindingSource.DataMember = "vehicleInventory";
-            this.vehicleInventoryBindingSource.DataSource = this.car_rentalDataSet11;
-            // 
-            // car_rentalDataSet11
-            // 
-            this.car_rentalDataSet11.DataSetName = "car_rentalDataSet1";
-            this.car_rentalDataSet11.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
             // btnNext
             // 
             this.btnNext.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -649,7 +628,6 @@
             this.lostDataGridViewTextBoxColumn,
             this.spentDataGridViewTextBoxColumn});
             this.dgvClient.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.dgvClient.DataSource = this.clientProfilesBindingSource;
             dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(212)))), ((int)(((byte)(172)))), ((int)(((byte)(65)))));
             dataGridViewCellStyle8.Font = new System.Drawing.Font("Franklin Gothic Medium", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -788,24 +766,6 @@
             this.spentDataGridViewTextBoxColumn.ReadOnly = true;
             this.spentDataGridViewTextBoxColumn.Visible = false;
             // 
-            // clientProfilesBindingSource
-            // 
-            this.clientProfilesBindingSource.DataMember = "clientProfiles";
-            this.clientProfilesBindingSource.DataSource = this.car_rentalDataSet1;
-            // 
-            // car_rentalDataSet1
-            // 
-            this.car_rentalDataSet1.DataSetName = "car_rentalDataSet1";
-            this.car_rentalDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // clientProfilesTableAdapter
-            // 
-            this.clientProfilesTableAdapter.ClearBeforeFill = true;
-            // 
-            // vehicleInventoryTableAdapter
-            // 
-            this.vehicleInventoryTableAdapter.ClearBeforeFill = true;
-            // 
             // borderlessForm
             // 
             this.borderlessForm.AnimateWindow = true;
@@ -842,11 +802,7 @@
             this.clientInfo.ResumeLayout(false);
             this.issueVehicles.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvVehicles)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.vehicleInventoryBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.car_rentalDataSet11)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClient)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.clientProfilesBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.car_rentalDataSet1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -860,9 +816,6 @@
         private Guna.UI2.WinForms.Guna2ComboBox cmbGender;
         private Guna.UI2.WinForms.Guna2Button btnRefreshClient;
         private Guna.UI2.WinForms.Guna2DataGridView dgvClient;
-        private System.Windows.Forms.BindingSource clientProfilesBindingSource;
-        private car_rentalDataSet1 car_rentalDataSet1;
-        private car_rentalDataSet1TableAdapters.clientProfilesTableAdapter clientProfilesTableAdapter;
         private Guna.UI2.WinForms.Guna2GradientButton btnNext;
         private System.Windows.Forms.DataGridViewTextBoxColumn clientIDDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
@@ -875,9 +828,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn damagedDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn lostDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn spentDataGridViewTextBoxColumn;
-        private System.Windows.Forms.BindingSource vehicleInventoryBindingSource;
-        private car_rentalDataSet1 car_rentalDataSet11;
-        private car_rentalDataSet1TableAdapters.vehicleInventoryTableAdapter vehicleInventoryTableAdapter;
         private Guna.UI2.WinForms.Guna2BorderlessForm borderlessForm;
         private Guna.UI2.WinForms.Guna2DragControl dragControlForm;
         private System.Windows.Forms.Panel issueVehicles;

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -75,7 +75,10 @@ namespace CarRentalManagementSystem._Pages
         private void btnAdd_Click(object sender, EventArgs e)
         {
             Frm_Client client = new Frm_Client();
-            client.ShowDialog();
+            if (client.ShowDialog() == DialogResult.OK)
+            {
+                loadClients();
+            }
         }
         private void refreshTable_Tick(object sender, EventArgs e)
         {
@@ -94,13 +97,17 @@ namespace CarRentalManagementSystem._Pages
 
                 // Open the form in Edit mode with the selected row data
                 Frm_Client editForm = new Frm_Client(clientId, name, gender, email, phone, address);
-                editForm.ShowDialog();
+                if (editForm.ShowDialog() == DialogResult.OK)
+                {
+                    loadClients();
+                }
             }
             else if (e.ColumnIndex == dgvClient.Columns["Delete"].Index && e.RowIndex >= 0)
             {
                 string name = dgvClient.Rows[e.RowIndex].Cells[1].Value.ToString();
                 int clientId = Convert.ToInt32(dgvClient.Rows[e.RowIndex].Cells[0].Value);
                 clientCLass.DeleteClient(name, clientId);
+                loadClients();
             }
         }
         private void Page_Client_Leave(object sender, EventArgs e)
